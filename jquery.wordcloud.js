@@ -172,7 +172,9 @@ if (!window.clearImmediate) {
 			rotateRatio: 0.1,
 			clearCanvas: true,
 			fillBox: false,
-			shape: 'circle'
+			shape: 'circle',
+			maxWords: 0,
+			database: {}
 		};
 
 		if (options) { 
@@ -502,6 +504,17 @@ if (!window.clearImmediate) {
 
 			// cancel previous wordcloud action by trigger
 			$el.trigger('wordcloudstart');
+			
+			$.ajax({
+				async: false,
+				data: $.extend({
+					maxWords: settings.maxWords
+				url: '../freq/wordcounter.php',
+					settings.wordList = data;
+				error: function(jqxhr, text, error) {
+					console.error("Error fetching word counts: " + error);
+				}
+			});
 			
 			var i = 0;
 			if (settings.wait !== 0) {
