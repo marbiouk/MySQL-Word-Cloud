@@ -174,17 +174,22 @@ if (!window.clearImmediate) {
 			fillBox: false,
 			shape: 'circle',
 			maxWords: 0,
-			database: {}
+			database: {},
+			biggestWord: 0
 		};
 
 		if (options) { 
 			$.extend(settings, options);
 		}
-
+		
 		if (typeof settings.weightFactor !== 'function') {
 			var factor = settings.weightFactor;
 			settings.weightFactor = function (pt) {
-				return pt*factor; //in px
+				if (settings.biggestWord > 0) {
+					return pt * settings.biggestWord / settings.wordList[0][1];
+				} else {
+					return pt*factor; //in px
+				}
 			};
 		}
 
@@ -509,8 +514,12 @@ if (!window.clearImmediate) {
 				async: false,
 				data: $.extend({
 					maxWords: settings.maxWords
+				}, settings.database),
 				url: '../freq/wordcounter.php',
+				dataType: 'json',
+				success: function(data) {
 					settings.wordList = data;
+				},
 				error: function(jqxhr, text, error) {
 					console.error("Error fetching word counts: " + error);
 				}
