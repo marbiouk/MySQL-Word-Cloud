@@ -1,7 +1,7 @@
 <?php 
 
 function getParameter($paramName, $ifNull = false) {
-	if (isset($_REQUEST[$paramName])) {
+	if (isset($_REQUEST[$paramName]) && strlen($_REQUEST[$paramName]) > 0) {
 		return $_REQUEST[$paramName];
 	} else if ($ifNull === false) {
 		// parameter is required
@@ -20,6 +20,7 @@ $select_fields = getParameter("selectFields","*");
 $table_name = getParameter("tableName");
 $where_clause = getParameter("where","TRUE");
 
+$excluded_words = getParameter("excludedWords","");
 $max_words = getParameter("maxWords","0");
 if (is_numeric($max_words)) {
 	$max_words = intval($max_words);
@@ -35,6 +36,7 @@ $query = <<<EOD
 		$select_fields
 	FROM
 		$table_name
+	WHERE $where_clause
 		
 EOD;
 
@@ -92,14 +94,25 @@ function clean_string($str) {
 require_once "porter.php";
 include_once "stopwords.php";
 
+$delim = " ";
+
+// add specified excluded words to stop words
+$stop_tok = strtok(clean_string($excluded_words), $delim);
+while ($stop_tok !== false) {
+	$stopWords[] = trim(strtolower(PorterStemmer::Stem($stop_tok)));
+	$stop_tok = strtok($delim);
+}
+
+
 $words = Array();
 
 foreach($data as $data_item) {
-	$delim = " ";
-	
 // 	echo "Original : " . $data_item["text"] . "<br>";
+	$clean_text = "";
 	
-	$clean_text = clean_string($data_item["text"]);
+	foreach($data_item as $field => $val) {
+		$clean_text .= " " . clean_string($val);
+	}
 	
 // 	echo "Clean : " . $clean_text . "<hr>";
 	$tok = strtok($clean_text, $delim);
