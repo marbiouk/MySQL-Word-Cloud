@@ -29,6 +29,7 @@ $stopWords = Array(
 "both",
 "but",
 "by",
+"can",
 "can't",
 "cannot",
 "could",
