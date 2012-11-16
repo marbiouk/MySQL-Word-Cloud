@@ -173,7 +173,7 @@ if (!window.clearImmediate) {
 			clearCanvas: true,
 			fillBox: false,
 			shape: 'circle',
-			maxWords: 0,
+			wordCountUrl: null,
 			database: {},
 			biggestWord: 0
 		};
@@ -510,20 +510,21 @@ if (!window.clearImmediate) {
 			// cancel previous wordcloud action by trigger
 			$el.trigger('wordcloudstart');
 			
-			$.ajax({
-				async: false,
-				data: $.extend({
-					maxWords: settings.maxWords
-				}, settings.database),
-				url: '../freq/wordcounter.php',
-				dataType: 'json',
-				success: function(data) {
-					settings.wordList = data;
-				},
-				error: function(jqxhr, text, error) {
-					console.error("Error fetching word counts: " + error);
-				}
-			});
+			
+			if (settings.wordCountUrl) {
+				$.ajax({
+					async: false,
+					data: settings.database,
+					url: settings.wordCountUrl,
+					dataType: 'json',
+					success: function(data) {
+						settings.wordList = data;
+					},
+					error: function(jqxhr, text, error) {
+						console.error("Error fetching word counts: " + error);
+					}
+				});
+			}
 			
 			var i = 0;
 			if (settings.wait !== 0) {
