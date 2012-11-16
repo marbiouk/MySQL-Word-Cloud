@@ -5,3 +5,5 @@ wordfreq.min.js
 wordfreq.worker.min.js
 worker.min.js
 go2.min.js
+.settings/*
+.project
