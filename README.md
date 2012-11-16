@@ -1,44 +1,41 @@
-HTML5 Word Cloud
+MySQL Word Cloud
 ================
 
-Word Cloud on HTML5 canvas, inspired by 
-[Wordle](http://www.wordle.net/).
+Create an aesthetic word cloud on an HTML5 canvas from your MySQL Data
 
-Author: Timothy Chien &lt;timdream@gmail.com&gt;
+inspired by [timdream's wordcloud](http://timc.idv.tw/wordcloud/).
 
-URL: http://timc.idv.tw/wordcloud/
+Author: Matt Dodge &lt;mattedgod@gmail.com&gt;
 
-## Intro
 
-HTML5 Word Cloud is inspired by Wrodle, instead of generate the image 
-on a Java Applet, this experiment is entirely on HTML5 canvas.
+## Requirements
 
-## Under the hood
+* PHP with PDO
+* jQuery
+* HTML5 Browser with Canvas support (aka anything that is not IE 8 or lower)
 
-This program is composed of three libraries, two of them have 
-dependency of jQuery thus they are warped as jQuery plug-ins:
+## Usage
 
-1. `jquery.getcontent.js` which access remote or local content though 
-   Google Feed API, YQL data.html (experimental), Facebook Javascript SDK, and FileReader API.
-2. `wordfreq.js` which count the phrases/words by running N-gram 
-   analysis (for Chinese) and [Porter Stemming Algorithm](http://tartarus.org/~martin/PorterStemmer/) 
-   (for English) in Web Workers.
-3. finally, `jquery.wordcloud.js` draw the phrases/words on canvas 
-   using configured parameters.
+1. Clone or download into a directory on your web server, let's call the directory "wordcloud"
+2. *After* you have loaded jQuery with a &lt;SCRIPT&gt; tag, load the plugin
 
-Each of the libraries comes with their own tests/demos and are 
-designed to be reusable.
+    ```html
+    <script type="text/javascript" src="wordcloud/jquery.wordcloud.js"></script>
+    ```
 
-Following external libraries are included:
+3. Put a canvas somewhere on your page
 
-1. Porter Stemming Algorithm in Javascript as mentioned above.
-2. [Simulated Web Workers](https://github.com/timdream/simworker) (`worker.js`) 
-   to provide a simulated web workers interface in IEs and Mobile Safari.
+    ```html
+    <canvas id="cloudcanvas" width="600" height="400"></canvas>
+    ```
+4. After the DOM is ready, call the `wordCloud` function on the canvas
 
-## Contributors
+   ```js
+   $("#cloudcanvas").wordCloud({
+      database: {
+         // database parameters go here, see parameters section
+      }
+   });
+   ```
 
-* [Yuren Ju](https://github.com/yurenju/wordcloud) for Facebook Status fetching
-
-## Q&amp;A
-
-I can be reached by e-mail.
+That's it! See the tests in the tests directory for some living examples.
