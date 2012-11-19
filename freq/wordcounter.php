@@ -20,6 +20,7 @@ $select_fields = getParameter("selectFields","*");
 $table_name = getParameter("tableName");
 $where_clause = getParameter("where","TRUE");
 $limit = getParameter("limit", "5000");
+$order = getParameter("order", "NULL");
 
 $excluded_words = getParameter("excludedWords","");
 $max_words = getParameter("maxWords","0");
@@ -38,6 +39,7 @@ $query = <<<EOD
 	FROM
 		$table_name
 	WHERE $where_clause
+	ORDER BY $order
 	LIMIT $limit
 		
 EOD;
