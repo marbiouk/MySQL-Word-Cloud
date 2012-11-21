@@ -68,6 +68,7 @@
                    self::replace($word, 'sses', 'ss')
                 OR self::replace($word, 'ies', 'i')
                 OR self::replace($word, 'ss', 'ss')
+                OR self::replace($word, "'s", '')
                 OR self::replace($word, 's', '');
             }
 
