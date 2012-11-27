@@ -11,9 +11,11 @@ function getParameter($paramName, $ifNull = false) {
 	}
 }
 
-$db_host = getParameter("dbHost");
-$db_user = getParameter("dbUser");
-$db_pass = getParameter("dbPass");
+include_once "connections.php";
+
+$db_host = getParameter("dbHost",$_GLOBALS['mysqlconn']['host']);
+$db_user = getParameter("dbUser",$_GLOBALS['mysqlconn']['user']);
+$db_pass = getParameter("dbPass",$_GLOBALS['mysqlconn']['pass']);
 $db_name = getParameter("dbName");
 
 $select_fields = getParameter("selectFields","*");
