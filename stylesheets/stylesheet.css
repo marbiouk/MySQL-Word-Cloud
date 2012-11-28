@@ -321,6 +321,22 @@ Full-Width Styles
   text-shadow: #111 0px 0px 10px;
 }
 
+#menu {
+
+}
+
+#menu a {
+	display: inline-block;
+	font-size: 20px;
+	color: #007EDF;
+	margin-right: 20px;
+}
+
+#menu a:hover {
+	color: #43adff;
+  	text-shadow: #0090ff 0px 0px 2px;
+}
+
 #downloads {
   position: absolute;
   width: 210px;
