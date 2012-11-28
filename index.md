@@ -9,7 +9,9 @@ layout: default
 - **or have any data at all...**  
 
 ***and you just want a word cloud, then you have come to the right place!***  
-
+  
+  
+  
 ###HTML5 Word Cloud as easy as 1...2...3
 
 1. **Extract**
@@ -20,16 +22,16 @@ layout: default
 
 	Add a `<SCRIPT>` tag for the jQuery plugin to the `<HEAD>` section of your site:
 	
-		{% highlight html %}
-		<script type="text/javascript" src="wordcloud/jquery.wordcloud.js"></script>
-		{% endhighlight %}
+	{% highlight html %}
+	<script type="text/javascript" src="wordcloud/jquery.wordcloud.js"></script>
+	{% endhighlight %}
 	
 	and a `<CANVAS>` tag where you want the cloud to appear in the `<BODY>` section of your site:
 	
-		{% highlight html %}
-		<canvas id="cloudcanvas" width="600" height="400"></canvas>
-		{% endhighlight %}
-		
+	{% highlight html %}
+	<canvas id="cloudcanvas" width="600" height="400"></canvas>
+	{% endhighlight %}
+
 3. **Connect**
 
 	After the [DOM is ready](http://api.jquery.com/ready/), call the `wordcloud` function on the canvas jQuery object with your database credentials.
