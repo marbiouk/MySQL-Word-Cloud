@@ -42,7 +42,7 @@ $("#cloudcanvas").wordCloud({
 		dbPass: <your database password>,
 		dbName: <your database name>,
 		selectFields: <comma separated list of fields to select>,
-		tableName: <database table to select from>,
+		tableName: <database table to select from>
 	}
 });
 {% endhighlight %}
