@@ -1,5 +1,10 @@
 <?php 
 
+// if called from command line, parse parameters into REQUEST first
+if(defined('STDIN')) {
+	parse_str(implode('&', array_slice($argv, 1)), $_REQUEST);
+}
+
 function getParameter($paramName, $ifNull = false) {
 	if (isset($_REQUEST[$paramName]) && strlen($_REQUEST[$paramName]) > 0) {
 		return $_REQUEST[$paramName];
