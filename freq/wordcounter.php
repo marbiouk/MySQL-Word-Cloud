@@ -94,9 +94,6 @@ class WordCount {
 }
 
 function clean_string($str) {
-	// First make any whitespace a space (newlines and such)...
-        $str = preg_replace("\s", " ", $str);
-
 	$str = preg_replace("#https?:?//[^\s]*#", "", $str);
 	$str = strip_tags($str);
 	$str = preg_replace("/&#?[0-9a-zA-Z]*;/","", $str);
