@@ -23,6 +23,8 @@ $db_user = getParameter("dbUser",$_GLOBALS['mysqlconn']['user']);
 $db_pass = getParameter("dbPass",$_GLOBALS['mysqlconn']['pass']);
 $db_name = getParameter("dbName");
 
+$jsonp_callback - getParameter("callback",false);
+
 $select_fields = getParameter("selectFields","*");
 $table_name = getParameter("tableName");
 $where_clause = getParameter("where","TRUE");
@@ -156,8 +158,17 @@ usort($words, function($a, $b) {
 
 $words = array_slice($words, 0, $max_words);
 
+// Wrap in JSON-P Callback if specified
+if ($jsonp_callback !== false) {
+    echo $jsonp_callback . "(";
+}
+
 echo json_encode(array_map(function($word) {
 	return Array($word->word,$word->count);
 }, $words));
+
+if ($jsonp_callback !== false) {
+    echo ")";
+}
 
 ?>
