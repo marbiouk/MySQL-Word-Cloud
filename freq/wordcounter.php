@@ -23,7 +23,7 @@ $db_user = getParameter("dbUser",$_GLOBALS['mysqlconn']['user']);
 $db_pass = getParameter("dbPass",$_GLOBALS['mysqlconn']['pass']);
 $db_name = getParameter("dbName");
 
-$jsonp_callback - getParameter("callback","nocallback");
+$jsonp_callback = getParameter("callback","nocallback");
 
 $select_fields = getParameter("selectFields","*");
 $table_name = getParameter("tableName");
